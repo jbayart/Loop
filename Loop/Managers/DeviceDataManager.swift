@@ -112,7 +112,7 @@ final class DeviceDataManager {
 
         setupPump()
         setupCGM()
-        Timer.scheduledTimer(timeInterval:60.0, target:self, selector:#selector(self.onIdleSpikeUpdate), userInfo:nil, repeats:false)
+        onIdleSpikeUpdate();
     }
 }
 
@@ -463,30 +463,30 @@ extension DeviceDataManager: PumpManagerDelegate {
         
         lastBLEDrivenUpdate = Date()
         
-        DispatchQueue.main.async {
-            self.cgmManager?.fetchNewDataIfNeeded { (result) in
-                
-                if case .newData(let glucoseList) = result {
-                    AnalyticsManager.shared.didFetchNewCGMData()
-                    self.lastGlucose = glucoseList.first
+        self.cgmManager?.fetchNewDataIfNeeded { (result) in
+            
+            if case .newData(let glucoseList) = result {
+                AnalyticsManager.shared.didFetchNewCGMData()
+                self.lastGlucose = glucoseList.first
+            } else if (self.lastGlucose == nil) {
+                self.lastGlucose = self.cgmManager?.sensorState as? NewGlucoseSample
+            }
+            
+            if let manager = self.cgmManager {
+                self.queue.async {
+                    self.cgmManager(manager, didUpdateWith: result)
                 }
-                
-                if let manager = self.cgmManager {
-                    self.queue.async {
-                        self.cgmManager(manager, didUpdateWith: result)
-                    }
+                self.queue.async {
+                    self.setNextTimer()
                 }
             }
-        }
-
-        DispatchQueue.main.async {
-            self.setNextTimer()
         }
         
         
     }
     
     func setNextTimer() {
+        dispatchPrecondition(condition: .onQueue(queue))
         var intervalToNextUpdate = TimeInterval(minutes: 1.0)
         var dateFromLastUpdate = self.lastGlucose?.date
         if (dateFromLastUpdate != nil) {
@@ -496,9 +496,16 @@ extension DeviceDataManager: PumpManagerDelegate {
             self.log.default("Next spike update in \((intervalToNextUpdate/60).rounded(.towardZero)) minutes and \(intervalToNextUpdate.truncatingRemainder(dividingBy: 60.0)) seconds")
         }
         if (intervalToNextUpdate < 0) {
-            intervalToNextUpdate = TimeInterval(minutes:1.0)
+            if (intervalToNextUpdate < .minutes(-5)) {
+                intervalToNextUpdate = TimeInterval(minutes:5.0)
+            } else {
+                intervalToNextUpdate = TimeInterval(minutes:1.0)
+            }
         }
-        Timer.scheduledTimer(timeInterval:intervalToNextUpdate, target:self, selector:#selector(self.onIdleSpikeUpdate), userInfo:nil, repeats:false)
+        DispatchQueue.main.async {
+            // timer needs a runloop?
+            Timer.scheduledTimer(timeInterval: intervalToNextUpdate, target: self, selector: #selector(self.onIdleSpikeUpdate), userInfo: nil, repeats: false)
+        }
     }
 }
 
