@@ -537,7 +537,7 @@ extension DeviceDataManager: PumpManagerDelegate {
         var dateFromLastUpdate = self.lastGlucose?.date
         if (dateFromLastUpdate != nil) {
             self.log.default("Last spike update \(dateFromLastUpdate!.timeIntervalSinceNow.minutes) minutes ago")
-            dateFromLastUpdate = dateFromLastUpdate!.addingTimeInterval(TimeInterval(minutes: 5.1))
+            dateFromLastUpdate = dateFromLastUpdate!.addingTimeInterval(TimeInterval(minutes: 5.25))
             intervalToNextUpdate = dateFromLastUpdate!.timeIntervalSinceNow
             self.log.default("Next spike update in \((intervalToNextUpdate/60).rounded(.towardZero)) minutes and \(intervalToNextUpdate.truncatingRemainder(dividingBy: 60.0)) seconds")
         }
