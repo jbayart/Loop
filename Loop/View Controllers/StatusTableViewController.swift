@@ -1114,10 +1114,15 @@ final class StatusTableViewController: ChartsTableViewController {
                 }
             }
         }
+
+        let notOpenBolusScreen = deviceManager.loopManager.settings.dosingEnabled
+            && deviceManager.loopManager.settings.microbolusesEnabled
+            && !deviceManager.loopManager.settings.microbolusesOpenBolusScreen
         deviceManager.loopManager.addCarbEntryAndRecommendBolus(updatedEntry) { (result) -> Void in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recommendation):
+                    guard !notOpenBolusScreen else { return }
                     if self.active && self.visible, let bolus = recommendation?.amount, bolus > 0 {
                         self.performSegue(withIdentifier: BolusViewController.className, sender: recommendation)
                     }
