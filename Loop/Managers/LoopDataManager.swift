@@ -1078,8 +1078,14 @@ extension LoopDataManager {
             return
         }
 
+        guard let bolusState = delegate?.bolusState, case .none = bolusState else {
+            logger.debug("Already bolusing. Cancel microbolus calculation.")
+            completion(false, nil)
+            return
+        }
+
         let cob = carbsOnBoard?.quantity.doubleValue(for: .gram()) ?? 0
-        let cobChek = (cob > 0 && settings.microbolusesEnabled) || (cob == 0 && settings.microbolusesWithoutCarbsEnabled)
+        let cobChek = (cob > 0 && settings.microbolusSettings.enabled) || (cob == 0 && settings.microbolusSettings.enabledWithoutCarbs)
 
         guard cobChek else {
             logger.debug("Microboluses disabled.")
@@ -1130,25 +1136,43 @@ extension LoopDataManager {
             break
         }
 
+        guard let threshold = settings.suspendThreshold, glucose.quantity > threshold.quantity else {
+            logger.debug("Current glucose is below the suspend threshold.")
+            completion(false, nil)
+            return
+        }
+
         let lowTrend = controlGlucoseQuantity.map { $0 < glucose.quantity } ?? true
 
-        let safetyCheck = !(lowTrend && settings.microbolusesSafeMode == .enabled)
+        let safetyCheck = !(lowTrend && settings.microbolusSettings.safeMode == .enabled)
         guard safetyCheck else {
             logger.debug("Control glucose is lower then current. Microbolus is not allowed.")
             completion(false, nil)
             return
         }
 
-        let maxBasalMinutes: Double = {
-            switch (cob > 0, lowTrend, settings.microbolusesSafeMode == .disabled) {
+        let minSize = 30.0
+
+        var maxBasalMinutes: Double = {
+            switch (cob > 0, lowTrend, settings.microbolusSettings.safeMode == .disabled) {
             case (true, false, _), (true, true, true):
-                return settings.microbolusesSize
+                return settings.microbolusSettings.size
             case (false, false, _), (false, true, true):
-                return settings.microbolusesWithoutCarbsSize
+                return settings.microbolusSettings.sizeWithoutCarbs
             default:
-                return 30
+                return minSize
             }
         }()
+
+        switch recommendedBolus.recommendation.notice {
+        case .glucoseBelowSuspendThreshold, .predictedGlucoseBelowTarget:
+            logger.debug("Microbolus canceled by recommendation notice: \(recommendedBolus.recommendation.notice!)")
+            completion(false, nil)
+            return
+        case .currentGlucoseBelowTarget:
+            maxBasalMinutes = minSize
+        case .none: break
+        }
 
         let maxMicroBolus = currentBasalRate * maxBasalMinutes / 60
 
@@ -1162,8 +1186,8 @@ extension LoopDataManager {
             completion(false, nil)
             return
         }
-        guard microBolus >= settings.microbolusesMinimumBolusSize else {
-            logger.debug("Microbolus will not be enacted due to it being lower than the configured minimum bolus size. (\(String(describing: microBolus)) vs \(String(describing: settings.microbolusesMinimumBolusSize)))")
+        guard microBolus >= settings.microbolusSettings.minimumBolusSize else {
+            logger.debug("Microbolus will not be enacted due to it being lower than the configured minimum bolus size. (\(String(describing: microBolus)) vs \(String(describing: settings.microbolusSettings.minimumBolusSize)))")
             completion(false, nil)
             return
         }
@@ -1462,6 +1486,9 @@ protocol LoopDataManagerDelegate: class {
     ///   - bolus: The new recommended micro bolus
     ///   - completion: A closure called once on completion
     func loopDataManager(_ manager: LoopDataManager, didRecommendMicroBolus bolus: (amount: Double, date: Date), completion: @escaping (_ error: Error?) -> Void) -> Void
+
+    /// Current bolus state
+    var bolusState: PumpManagerStatus.BolusState? { get }
 }
 
 private extension TemporaryScheduleOverride {
