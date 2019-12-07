@@ -33,7 +33,13 @@ public struct LoopSettings: Equatable {
 
     public var suspendThreshold: GlucoseThreshold? = nil
 
+    public var fpuRatio: Double?
+
+    public var fpuDelay: Double?
+
     public let retrospectiveCorrectionEnabled = true
+    
+    public var integralRetrospectiveCorrectionEnabled = false
 
     public var notOpenBolusScreen: Bool { dosingEnabled && microbolusSettings.enabled && !microbolusSettings.shouldOpenBolusScreen }
 
@@ -93,13 +99,19 @@ public struct LoopSettings: Equatable {
         glucoseTargetRangeSchedule: GlucoseRangeSchedule? = nil,
         maximumBasalRatePerHour: Double? = nil,
         maximumBolus: Double? = nil,
-        suspendThreshold: GlucoseThreshold? = nil
+        suspendThreshold: GlucoseThreshold? = nil,
+        integralRetrospectiveCorrectionEnabled: Bool = false,
+        fpuRatio: Double? = nil,
+        fpuDelay: Double? = nil
     ) {
         self.dosingEnabled = dosingEnabled
         self.glucoseTargetRangeSchedule = glucoseTargetRangeSchedule
         self.maximumBasalRatePerHour = maximumBasalRatePerHour
         self.maximumBolus = maximumBolus
         self.suspendThreshold = suspendThreshold
+        self.integralRetrospectiveCorrectionEnabled = integralRetrospectiveCorrectionEnabled
+        self.fpuRatio = fpuRatio
+        self.fpuDelay = fpuDelay
     }
 }
 
@@ -235,8 +247,16 @@ extension LoopSettings: RawRepresentable {
 
         self.maximumBolus = rawValue["maximumBolus"] as? Double
 
+        self.fpuRatio = rawValue["fpuRatio"] as? Double
+
+        self.fpuDelay = rawValue["fpuDelay"] as? Double
+
         if let rawThreshold = rawValue["minimumBGGuard"] as? GlucoseThreshold.RawValue {
             self.suspendThreshold = GlucoseThreshold(rawValue: rawThreshold)
+        }
+
+        if let integralRetrospectiveCorrectionEnabled = rawValue["integralRetrospectiveCorrectionEnabled"] as? Bool {
+            self.integralRetrospectiveCorrectionEnabled = integralRetrospectiveCorrectionEnabled
         }
     }
 
@@ -245,6 +265,7 @@ extension LoopSettings: RawRepresentable {
             "version": LoopSettings.version,
             "dosingEnabled": dosingEnabled,
             "overridePresets": overridePresets.map { $0.rawValue },
+            "integralRetrospectiveCorrectionEnabled": integralRetrospectiveCorrectionEnabled
             "microbolusSettings": microbolusSettings.rawValue
         ]
 
@@ -255,6 +276,8 @@ extension LoopSettings: RawRepresentable {
         raw["maximumBasalRatePerHour"] = maximumBasalRatePerHour
         raw["maximumBolus"] = maximumBolus
         raw["minimumBGGuard"] = suspendThreshold?.rawValue
+        raw["fpuRatio"] = fpuRatio
+        raw["fpuDelay"] = fpuDelay
 
         return raw
     }
