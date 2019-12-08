@@ -399,6 +399,15 @@
 		C330EE582381DECC00CA667D /* Microbolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330EE562381DEC600CA667D /* Microbolus.swift */; };
 		C330EE5A2381DEEC00CA667D /* MicrobolusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330EE592381DEEC00CA667D /* MicrobolusView.swift */; };
 		C330EE5C2381DF0100CA667D /* MicrobolusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330EE5B2381DF0100CA667D /* MicrobolusViewController.swift */; };
+		C34ECB27239BF8BB00833E43 /* FPURatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB25239BF8BB00833E43 /* FPURatio.swift */; };
+		C34ECB28239BF8BB00833E43 /* FPUDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB26239BF8BB00833E43 /* FPUDelay.swift */; };
+		C34ECB29239BF8F000833E43 /* FPURatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB25239BF8BB00833E43 /* FPURatio.swift */; };
+		C34ECB2A239BF8F000833E43 /* FPUDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB26239BF8BB00833E43 /* FPUDelay.swift */; };
+		C34ECB2D239BF94200833E43 /* FPURatioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB2B239BF94200833E43 /* FPURatioTableViewController.swift */; };
+		C34ECB2E239BF94200833E43 /* FPUDelayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB2C239BF94200833E43 /* FPUDelayTableViewController.swift */; };
+		C34ECB30239BFE4700833E43 /* IntegralRetrospectiveCorrection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB2F239BFE4700833E43 /* IntegralRetrospectiveCorrection.swift */; };
+		C34ECB32239BFEAB00833E43 /* IntegralRetrospectiveCorrectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ECB31239BFEAB00833E43 /* IntegralRetrospectiveCorrectionTests.swift */; };
+		C34ECB34239BFEE900833E43 /* Fixtures in Resources */ = {isa = PBXBuildFile; fileRef = C34ECB33239BFEE900833E43 /* Fixtures */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1059,6 +1068,13 @@
 		C330EE562381DEC600CA667D /* Microbolus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microbolus.swift; sourceTree = "<group>"; };
 		C330EE592381DEEC00CA667D /* MicrobolusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobolusView.swift; sourceTree = "<group>"; };
 		C330EE5B2381DF0100CA667D /* MicrobolusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobolusViewController.swift; sourceTree = "<group>"; };
+		C34ECB25239BF8BB00833E43 /* FPURatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FPURatio.swift; path = LoopCore/FPURatio.swift; sourceTree = SOURCE_ROOT; };
+		C34ECB26239BF8BB00833E43 /* FPUDelay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FPUDelay.swift; path = LoopCore/FPUDelay.swift; sourceTree = SOURCE_ROOT; };
+		C34ECB2B239BF94200833E43 /* FPURatioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPURatioTableViewController.swift; sourceTree = "<group>"; };
+		C34ECB2C239BF94200833E43 /* FPUDelayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPUDelayTableViewController.swift; sourceTree = "<group>"; };
+		C34ECB2F239BFE4700833E43 /* IntegralRetrospectiveCorrection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegralRetrospectiveCorrection.swift; sourceTree = "<group>"; };
+		C34ECB31239BFEAB00833E43 /* IntegralRetrospectiveCorrectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegralRetrospectiveCorrectionTests.swift; sourceTree = "<group>"; };
+		C34ECB33239BFEE900833E43 /* Fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fixtures; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1236,6 +1252,7 @@
 			isa = PBXGroup;
 			children = (
 				43511CDF21FD80E400566C63 /* RetrospectiveCorrection.swift */,
+				C34ECB2F239BFE4700833E43 /* IntegralRetrospectiveCorrection.swift */,
 				43511CE021FD80E400566C63 /* StandardRetrospectiveCorrection.swift */,
 			);
 			path = RetrospectiveCorrection;
@@ -1486,6 +1503,8 @@
 				43D9FFD121EAE05D00AF44BF /* LoopCore.h */,
 				C330EE562381DEC600CA667D /* Microbolus.swift */,
 				43D9FFD221EAE05D00AF44BF /* Info.plist */,
+				C34ECB26239BF8BB00833E43 /* FPUDelay.swift */,
+				C34ECB25239BF8BB00833E43 /* FPURatio.swift */,
 			);
 			path = LoopCore;
 			sourceTree = "<group>";
@@ -1558,6 +1577,8 @@
 		43F5C2CE1B92A2A0003EB13D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C34ECB2C239BF94200833E43 /* FPUDelayTableViewController.swift */,
+				C34ECB2B239BF94200833E43 /* FPURatioTableViewController.swift */,
 				43DBF04B1C93B8D700B3C386 /* BolusViewController.swift */,
 				43D2E8221F00425400AE5CBF /* BolusViewController+LoopDataManager.swift */,
 				43A51E1E1EB6D62A000736CC /* CarbAbsorptionViewController.swift */,
@@ -1625,9 +1646,11 @@
 		43F78D2C1C8FC58F002152D1 /* LoopTests */ = {
 			isa = PBXGroup;
 			children = (
+				C34ECB33239BFEE900833E43 /* Fixtures */,
 				43E2D90F1D20C581004DA55F /* Info.plist */,
 				7D2366E421250E0A0028B67D /* InfoPlist.strings */,
 				43E2D8C91D20B9E7004DA55F /* KeychainManagerTests.swift */,
+				C34ECB31239BFEAB00833E43 /* IntegralRetrospectiveCorrectionTests.swift */,
 			);
 			path = LoopTests;
 			sourceTree = "<group>";
@@ -2335,6 +2358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C34ECB34239BFEE900833E43 /* Fixtures in Resources */,
 				7D2366E621250E0A0028B67D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2587,6 +2611,7 @@
 				43441A9C1EDB34810087958C /* StatusExtensionContext+LoopKit.swift in Sources */,
 				43C05CC521EC29E3006FB252 /* TextFieldTableViewCell.swift in Sources */,
 				4FF4D1001E18374700846527 /* WatchContext.swift in Sources */,
+				C34ECB30239BFE4700833E43 /* IntegralRetrospectiveCorrection.swift in Sources */,
 				4315D28A1CA5F45E00589052 /* DiagnosticLogger+LoopKit.swift in Sources */,
 				C1D289B522F90A52003FFBD9 /* BasalDeliveryState.swift in Sources */,
 				4F2C15821E074FC600E160D4 /* NSTimeInterval.swift in Sources */,
@@ -2685,11 +2710,13 @@
 				431A8C401EC6E8AB00823B9C /* CircleMaskView.swift in Sources */,
 				439897371CD2F80600223065 /* AnalyticsManager.swift in Sources */,
 				895FE0952201234000FCF18A /* OverrideSelectionViewController.swift in Sources */,
+				C34ECB2D239BF94200833E43 /* FPURatioTableViewController.swift in Sources */,
 				439706E622D2E84900C81566 /* PredictionSettingTableViewCell.swift in Sources */,
 				430D85891F44037000AF2D4F /* HUDViewTableViewCell.swift in Sources */,
 				43A51E211EB6DBDD000736CC /* ChartsTableViewController.swift in Sources */,
 				438849EE1D2A1EBB003B3F23 /* MLabService.swift in Sources */,
 				438D42FB1D7D11A4003244B0 /* PredictionInputEffectTableViewCell.swift in Sources */,
+				C34ECB2E239BF94200833E43 /* FPUDelayTableViewController.swift in Sources */,
 				43F4EF1D1BA2A57600526CE1 /* DiagnosticLogger.swift in Sources */,
 				432E73CB1D24B3D6009AD15D /* RemoteDataManager.swift in Sources */,
 				43C2FAE11EB656A500364AFF /* GlucoseEffectVelocity.swift in Sources */,
@@ -2762,9 +2789,11 @@
 				C330EE582381DECC00CA667D /* Microbolus.swift in Sources */,
 				43C05CB821EBEA54006FB252 /* HKUnit.swift in Sources */,
 				4345E3F421F036FC009E00E5 /* Result.swift in Sources */,
+				C34ECB2A239BF8F000833E43 /* FPUDelay.swift in Sources */,
 				43D9002021EB209400AF44BF /* NSTimeInterval.swift in Sources */,
 				43C05CA921EB2B26006FB252 /* PersistenceController.swift in Sources */,
 				431EA87221EB29150076EC1A /* InsulinModelSettings.swift in Sources */,
+				C34ECB29239BF8F000833E43 /* FPURatio.swift in Sources */,
 				43D9002121EB209400AF44BF /* GlucoseThreshold.swift in Sources */,
 				43C05CAB21EB2B4A006FB252 /* NSBundle.swift in Sources */,
 				43D9002221EB209400AF44BF /* LoopSettings.swift in Sources */,
@@ -2815,9 +2844,11 @@
 				C330EE572381DEC600CA667D /* Microbolus.swift in Sources */,
 				43C05CB921EBEA54006FB252 /* HKUnit.swift in Sources */,
 				4345E3F521F036FC009E00E5 /* Result.swift in Sources */,
+				C34ECB28239BF8BB00833E43 /* FPUDelay.swift in Sources */,
 				43D9FFFB21EAF3D300AF44BF /* NSTimeInterval.swift in Sources */,
 				43C05CA821EB2B26006FB252 /* PersistenceController.swift in Sources */,
 				431EA87321EB29160076EC1A /* InsulinModelSettings.swift in Sources */,
+				C34ECB27239BF8BB00833E43 /* FPURatio.swift in Sources */,
 				43D9FFF921EAF34800AF44BF /* GlucoseThreshold.swift in Sources */,
 				43C05CAA21EB2B49006FB252 /* NSBundle.swift in Sources */,
 				43D9FFF521EAF27200AF44BF /* LoopSettings.swift in Sources */,
@@ -2848,6 +2879,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43E2D9151D20C5A2004DA55F /* KeychainManagerTests.swift in Sources */,
+				C34ECB32239BFEAB00833E43 /* IntegralRetrospectiveCorrectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3472,7 +3504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APPICON_NAME)";
 				CODE_SIGN_ENTITLEMENTS = Loop/Loop.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Loop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3509,7 +3541,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WatchApp Extension/WatchApp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -3532,7 +3564,7 @@
 				CODE_SIGN_ENTITLEMENTS = "WatchApp Extension/WatchApp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -3553,7 +3585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APPICON_NAME)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
@@ -3574,7 +3606,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APPICON_NAME)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/watchOS";
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
@@ -3672,7 +3704,7 @@
 				CODE_SIGN_ENTITLEMENTS = Learn/Learn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Learn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -3700,7 +3732,7 @@
 				CODE_SIGN_ENTITLEMENTS = Learn/Learn.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Learn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -3854,7 +3886,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Loop Status Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -3876,7 +3908,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3NX6276X7H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Loop Status Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
