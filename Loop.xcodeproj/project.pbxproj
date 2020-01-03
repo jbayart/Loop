@@ -24,10 +24,6 @@
 /* Begin PBXBuildFile section */
 		2E3484B7230607D700B11C92 /* SpikeClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3484B5230607D700B11C92 /* SpikeClient.framework */; };
 		2E3484B8230607D700B11C92 /* SpikeClientUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3484B6230607D700B11C92 /* SpikeClientUI.framework */; };
-		3804343D23747354004BAB52 /* Microbolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3804343C23747354004BAB52 /* Microbolus.swift */; };
-		3804343E237474AE004BAB52 /* Microbolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3804343C23747354004BAB52 /* Microbolus.swift */; };
-		38BE6D8D236C8A110074CF11 /* MicrobolusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BE6D8C236C8A110074CF11 /* MicrobolusViewController.swift */; };
-		38CE2218236B134F00DFE990 /* MicrobolusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CE2217236B134F00DFE990 /* MicrobolusView.swift */; };
 		43027F0F1DFE0EC900C51989 /* HKUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F526D5E1DF2459000A04910 /* HKUnit.swift */; };
 		4302F4E11D4E9C8900F0FCAF /* TextFieldTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302F4E01D4E9C8900F0FCAF /* TextFieldTableViewController.swift */; };
 		4302F4E31D4EA54200F0FCAF /* InsulinDeliveryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302F4E21D4EA54200F0FCAF /* InsulinDeliveryTableViewController.swift */; };
@@ -2414,7 +2410,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C34ECB34239BFEE900833E43 /* Fixtures in Resources */,
-				7D2366E621250E0A0028B67D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

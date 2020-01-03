@@ -1,4 +1,4 @@
-github "mitchellhenke/LoopKit" "mitchellhenke-rsilvers-fpu"
+github "jbayart/LoopKit" "mitchellhenke-rsilvers-fpu"
 github "jbayart/CGMBLEKit" "FPU"
 github "i-schuetz/SwiftCharts" == 0.6.5
 github "jbayart/dexcom-share-client-swift.git" "FPU"
