@@ -11,6 +11,8 @@ import HealthKit
 public struct LoopSettings: Equatable {
     public var dosingEnabled = false
 
+    public var microbolusSettings = Microbolus.Settings()
+
     public let dynamicCarbAbsorptionEnabled = true
 
     public static let defaultCarbAbsorptionTimes: CarbStore.DefaultAbsorptionTimes = (fast: .hours(2), medium: .hours(3), slow: .hours(4))
@@ -56,7 +58,7 @@ public struct LoopSettings: Equatable {
     public var glucoseUnit: HKUnit? {
         return glucoseTargetRangeSchedule?.unit
     }
-    
+
     // MARK - Push Notifications
     
     public var deviceToken: Data?
@@ -178,6 +180,15 @@ extension LoopSettings {
             scheduleOverride = nil
         }
     }
+
+    public func currentMaximumBasalRatePerHour(date: Date, basalRates: BasalRateSchedule?) -> Double? {
+        guard let maximumBasalRatePerHour = maximumBasalRatePerHour else { return nil }
+        guard dosingEnabled, microbolusSettings.basalRateMultiplier > 0,
+            let currentBasalRate = basalRates?.value(at: date)
+        else { return maximumBasalRatePerHour }
+
+        return min(maximumBasalRatePerHour, currentBasalRate * microbolusSettings.basalRateMultiplier)
+    }
 }
 
 extension LoopSettings: RawRepresentable {
@@ -194,6 +205,11 @@ extension LoopSettings: RawRepresentable {
 
         if let dosingEnabled = rawValue["dosingEnabled"] as? Bool {
             self.dosingEnabled = dosingEnabled
+        }
+
+        if let microbolusSettingsRaw = rawValue["microbolusSettings"] as? Microbolus.Settings.RawValue,
+            let microbolusSettings = Microbolus.Settings(rawValue: microbolusSettingsRaw) {
+            self.microbolusSettings = microbolusSettings
         }
 
         if let glucoseRangeScheduleRawValue = rawValue["glucoseTargetRangeSchedule"] as? GlucoseRangeSchedule.RawValue {
@@ -245,6 +261,7 @@ extension LoopSettings: RawRepresentable {
             "dosingEnabled": dosingEnabled,
             "overridePresets": overridePresets.map { $0.rawValue },
             "integralRetrospectiveCorrectionEnabled": integralRetrospectiveCorrectionEnabled
+            "microbolusSettings": microbolusSettings.rawValue
         ]
 
         raw["glucoseTargetRangeSchedule"] = glucoseTargetRangeSchedule?.rawValue
